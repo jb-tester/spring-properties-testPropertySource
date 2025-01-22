@@ -31,12 +31,18 @@ class SpringTestPropertySourcesTest {
     // set in application.properties only
     @Value("${local.prop2}")
     String attr3;
+    // set in application.properties, overridden in @TestPropertySource#properties
+    @Value("${local.prop0}")
+    String attr00;
+
+
 
 
 
     @Test
     void testProperties() {
 
+        assertEquals("local_prop0 from test_messages.properties", attr00);
         assertEquals("tm.prop1 from TestPropertySources", attr0);
         assertEquals("tm.prop2 from test_messages.properties", attr1);
         assertEquals("local.prop1 from TestPropertySources", attr2);
